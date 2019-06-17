@@ -1,5 +1,7 @@
 library(tidyverse)
 library(shiny)
+wine_sub <- select(wine, -c("X", "taster_name", "taster_twitter_handle"))
+
 vino <- read.csv("vino.csv", header = T)
 vino$binned <- cut(vino$points, breaks = 6, labels = 0:5)
 vino$stars <- (vino$points-80)/(20) *5
