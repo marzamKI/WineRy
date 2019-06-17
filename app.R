@@ -1,7 +1,8 @@
 library(tidyverse)
 library(shiny)
 vino <- read.csv("vino.csv", header = T)
-vino$binned <- cut(vino$points, breaks = 5)
+vino$binned <- cut(vino$points, breaks = 6, labels = 0:5)
+vino$stars <- (vino$points-80)/(20) *5
 
 theme <-theme_bw(base_family="Helvetica")+
   theme(legend.position = "none",
@@ -26,7 +27,7 @@ shinyApp(
                 actionButton("btn_go","Go!"),
                 splitLayout( cellWidths = c("50%", "50%"),
                              plotOutput("price_plot"),
-                             plotOutput("points_plot"))
+                             plotOutput("stars_plot"))
       )
     )
   ),
@@ -40,15 +41,15 @@ shinyApp(
                     summarise("Average price (USD)" = mean(price, na.rm = TRUE))
       )
     
-    output$points_plot <- renderPlot({
+    output$stars_plot <- renderPlot({
       data <- filter(vino, vino$country == input$in_title)
       
-      ggplot(isolate(data), aes(isolate(data$points))) + 
+      ggplot(isolate(data), aes(isolate(data$stars))) + 
         geom_bar(fill = "white", color = "#29B00E") +
         labs(title = "Wine rating")+
         xlab("Rating")+
         ylab("")+
-        xlim(80,100)+
+        xlim(0,5)+
         theme
     })
     
@@ -56,14 +57,15 @@ shinyApp(
       
       data <- filter(vino, vino$country == input$in_title)
       
-      ggplot(data,aes(isolate(data$points), isolate(data$price)))+
+      ggplot(data,aes(isolate(data$stars), isolate(data$price)))+
         geom_smooth(aes(fill="red"),method="lm",formula=y~poly(x,2),se=F,color="red",size=0.6)+
         geom_point(shape=21,size=3,stroke=0.8,fill="white", color = "#29B00E")+
         labs(title = "Wine rating per price")+
         xlab("Rating")+
         ylab("Price (USD)") +
-        xlim(80,100)+
+        xlim(0,5)+
         theme
     })
   }
 )
+
