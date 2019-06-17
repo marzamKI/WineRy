@@ -2,6 +2,18 @@ library(tidyverse)
 vino <- read.csv("vino.csv", header = T)
 vino$binned <- cut(vino$points, breaks = 5)
 
+theme <-theme_bw(base_family="Helvetica")+
+  theme(legend.position = "none",
+        panel.grid.minor=element_blank(),
+        panel.grid.major.x=element_blank(),
+        panel.background=element_blank(),
+        panel.border=element_blank(),
+        legend.title=element_blank(),
+        axis.title=element_text(face="italic"),
+        axis.ticks.y=element_blank(),
+        axis.ticks.x=element_line(color="grey60"),
+        plot.title=element_text(face="bold", hjust=0.5))
+
 shinyApp(
   ui <- fluidPage(
     titlePanel("WineRy"),
@@ -35,17 +47,8 @@ shinyApp(
         labs(title = "Wine rating")+
         xlab("Rating")+
         ylab("")+
-        theme_bw(base_family="Helvetica")+
-        theme(legend.position = "none",
-              panel.grid.minor=element_blank(),
-              panel.grid.major.x=element_blank(),
-              panel.background=element_blank(),
-              panel.border=element_blank(),
-              legend.title=element_blank(),
-              axis.title=element_text(face="italic"),
-              axis.ticks.y=element_blank(),
-              axis.ticks.x=element_line(color="grey60"),
-              plot.title=element_text(face="bold", hjust=0.5))
+        xlim(80,100)+
+        theme
     })
     
     output$price_plot <- renderPlot({
@@ -58,17 +61,8 @@ shinyApp(
         labs(title = "Wine rating per price")+
         xlab("Rating")+
         ylab("Price (USD)") +
-        theme_bw(base_family="Helvetica")+
-        theme(legend.position = "none",
-              panel.grid.minor=element_blank(),
-              panel.grid.major.x=element_blank(),
-              panel.background=element_blank(),
-              panel.border=element_blank(),
-              legend.title=element_blank(),
-              axis.title=element_text(face="italic"),
-              axis.ticks.y=element_blank(),
-              axis.ticks.x=element_line(color="grey60"),
-              plot.title=element_text(face="bold", hjust=0.5))
+        xlim(80,100)+
+        theme
     })
   }
 )
