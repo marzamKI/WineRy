@@ -1,4 +1,5 @@
 library(tidyverse)
+library(shiny)
 wine_sub <- select(wine, -c("X", "taster_name", "taster_twitter_handle"))
 
 vino <- read.csv("vino.csv", header = T)
