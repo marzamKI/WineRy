@@ -1,4 +1,5 @@
 library(tidyverse)
+library(shiny)
 vino <- read.csv("vino.csv", header = T)
 vino$binned <- cut(vino$points, breaks = 5)
 
