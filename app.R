@@ -1,4 +1,6 @@
 library(tidyverse)
+wine_sub <- select(wine, -c("X", "taster_name", "taster_twitter_handle"))
+
 vino <- read.csv("vino.csv", header = T)
 vino$binned <- cut(vino$points, breaks = 5)
 
