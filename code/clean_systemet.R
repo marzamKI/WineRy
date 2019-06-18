@@ -24,3 +24,4 @@ write.csv(systemet_vin, "systemet_vin.csv")
 vino <- read.csv("data/vino.csv", header = T)
 vino$binned <- cut(vino$points, breaks = 6, labels = 0:5)
 vino$stars <- (vino$points-80)/(20) *5
+write.csv(vino, "vino.csv")
