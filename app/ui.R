@@ -6,8 +6,11 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(tableOutput("table"),
                  selectInput("in_title", label="Select country",choices = vino$country),
-                 selectInput("X", label="X Axis", choices = colnames(vino)),
-                 selectInput("Y", label="Y Axis", choices = colnames(vino)),
+                 selectizeInput("variety", "Select variety", vino$variety),
+                 splitLayout(cellWidths = c("50%", "50%"),
+                             selectInput("X", label="X Axis", choices = colnames(vino)),
+                             selectInput("Y", label="Y Axis", choices = colnames(vino))),
+                 br(),
                  actionButton("btn_go","Go!"),
                  hr(),
                  plotOutput("full_plot"),

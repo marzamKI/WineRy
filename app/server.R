@@ -29,7 +29,7 @@ server=function(input,output) {
       borders("world", regions = vino$country, colour="red", fill="red")
   })
   
-  output$stars_plot <- renderPlot({
+  go_plot <- eventReactive(input$btn_go, {
     data <- filter(vino, vino$country == input$in_title)
     ggplot(isolate(data), aes(isolate(data$stars))) + 
       geom_bar(fill = "white", color = "#29B00E") +
@@ -39,6 +39,9 @@ server=function(input,output) {
       xlim(0,5)+
       theme
   })
+  
+  output$stars_plot <- renderPlot(go_plot())
+  
   
   output$stars_plot <- renderPlot({
     data <- filter(vino, vino$country == input$in_title)
@@ -51,5 +54,3 @@ server=function(input,output) {
       theme
   })
 }
-
-
