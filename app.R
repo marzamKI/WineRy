@@ -74,7 +74,8 @@ shinyApp(
     
     output$map <- renderPlot({
       ggplot()+
-        borders("world", colour="gray50", fill="gray50")
+        borders("world", colour="gray50", fill="gray50") +
+        borders("world", regions = vino$country, colour="red", fill="red")
     })
   }
 )
