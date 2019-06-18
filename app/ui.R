@@ -1,5 +1,6 @@
 library(shiny)
 vino <- read.csv("vino.csv", header = T)
+wine_map <- read.csv("wine_map.csv", header = T)
 
 ui <- fluidPage(
   titlePanel("WineRy"),
