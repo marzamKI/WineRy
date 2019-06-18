@@ -1,5 +1,7 @@
 library(tidyverse)
 library(shiny)
+library(ggmap)
+
 wine_sub <- select(wine, -c("X", "taster_name", "taster_twitter_handle"))
 
 vino <- read.csv("vino.csv", header = T)
@@ -29,7 +31,8 @@ shinyApp(
                 actionButton("btn_go","Go!"),
                 splitLayout( cellWidths = c("50%", "50%"),
                              plotOutput("price_plot"),
-                             plotOutput("stars_plot"))
+                             plotOutput("stars_plot")),
+                plotOutput("map")
       )
     )
   ),
@@ -68,6 +71,12 @@ shinyApp(
         xlim(0,5)+
         theme
     })
+    
+    output$map <- renderPlot({
+      ggplot()+
+        borders("world", colour="gray50", fill="gray50")
+    })
   }
 )
+
 
