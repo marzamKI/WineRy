@@ -1,6 +1,7 @@
 library(tidyverse)
 library(ggmap)
-vino <- read.csv("vino.csv", header = T)
+vino <- read.csv("../data/vino.csv", header = T)
+wine_map <- read.csv("../data/wine_map.csv", header = T)
 
 theme <-theme_bw(base_family="Helvetica")+
   theme(legend.position = "none",
@@ -12,8 +13,17 @@ theme <-theme_bw(base_family="Helvetica")+
         axis.title=element_text(face="italic"),
         axis.ticks.y=element_blank(),
         axis.ticks.x=element_line(color="grey60"),
-        plot.title=element_text(face="bold", hjust=0.5))
+        plot.title=element_text(face="bold", hjust=0.5)
+        )
 
+ditch_axes <- theme(
+    axis.text = element_blank(),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    panel.border = element_blank(),
+    panel.grid = element_blank(),
+    axis.title = element_blank()
+    )
 
 server=function(input,output) {
   output$table <- renderTable(
@@ -25,8 +35,13 @@ server=function(input,output) {
     
   output$map <- renderPlot({
     ggplot()+
-      borders("world", colour="gray50", fill="gray50") +
-      borders("world", regions = vino$country, colour="red", fill="red")
+      borders("world", colour="gray80", fill="gray80") +
+      geom_polygon(data = wine_map, 
+                   aes(x=long, y = lat, group = group, fill = as.numeric(input$map_input))) +
+      ditch_axes +
+      coord_fixed() +
+      scale_fill_viridis_c(alpha = 1, begin = 0, end = 1,
+                           direction = 1, option = "D", aesthetics = "fill")
   })
   
   go_plot <- eventReactive(input$btn_go, {
