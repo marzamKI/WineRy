@@ -18,3 +18,9 @@ systemet_vin <- systemet %>%
 systemet_vin$APK <- parse_number(as.character(systemet_vin$Alkoholhalt))/systemet_vin$PrisPerLiter
 
 write.csv(systemet_vin, "systemet_vin.csv")
+
+
+## Vino
+vino <- read.csv("data/vino.csv", header = T)
+vino$binned <- cut(vino$points, breaks = 6, labels = 0:5)
+vino$stars <- (vino$points-80)/(20) *5
