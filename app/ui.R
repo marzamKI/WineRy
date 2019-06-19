@@ -42,17 +42,12 @@ ui <- navbarPage("WineRy",
                                # second row
                                fluidRow(
                                  column(6,style=list("padding-right: 5px;"),
-                                        plotOutput("stars_plot")),
+                                        plotOutput("stars_plot")
+                                        ),
                                  column(6,style=list("padding-left: 5px;"),
-                                        plotOutput("stars_plot2"))
-                               ),
-                               fluidRow(
-                                 column(6,style=list("padding-right: 5px;"),
-                                        plotOutput("spider")
-                                 ),
-                                 column(6,style=list("padding-left: 5px;"),
-                                        textOutput("descr")
-                                 )
+                                        div(plotOutput("spider"), align='center'),
+                                        div(textOutput("descr"), align = 'center')
+                                            )
                                )
                              )
                              
