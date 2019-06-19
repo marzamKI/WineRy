@@ -22,13 +22,13 @@ ui <- navbarPage("WineRy",
                                fluidRow(
                                  column(6,style=list("padding-right: 5px;"),
                                         selectInput("X", label="X Axis", 
-                                                    choices = c("stars", "price", "points"),
-                                                    selected = "stars")
+                                                    choices = c("score", "price_sek", "apk"),
+                                                    selected = "score")
                                  ),
                                  column(6,style=list("padding-left: 5px;"),
                                         selectInput("Y", label="Y Axis",
-                                                    choices = c("stars", "price", "points"),
-                                                    selected = "price")
+                                                    choices = c("score", "price_sek", "apk"),
+                                                    selected = "price_sek")
                                  )),
                                plotOutput("grape_plot")
                                
@@ -43,7 +43,7 @@ ui <- navbarPage("WineRy",
                                  column(6,style=list("padding-right: 5px;"),
                                         plotlyOutput("stars_plot")),
                                  column(6,style=list("padding-left: 5px;"),
-                                        div(plotOutput("spider"), align='center'),
+                                        div(plotlyOutput("spider"), align='center'),
                                         div(textOutput("descr"), align = 'center')
                                             )
                                )

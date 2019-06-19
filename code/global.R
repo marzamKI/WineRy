@@ -12,7 +12,8 @@ library(RColorBrewer)
 #library(available)
 
 # data for map
-vino <- read_csv("../data/vino.csv")
+vino <- read_csv("../data/wine_data_score_taste.csv")
+vino_us <- read_csv("../data/vino.csv")
 wine_map <- read_csv("../data/wine_map.csv")
 
 systemet <- read_csv("../data/systemet_vin.csv")
