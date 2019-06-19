@@ -1,4 +1,24 @@
+theme <-theme_bw(base_family="Helvetica")+
+  theme(legend.position = "none",
+        panel.grid.minor=element_blank(),
+        panel.grid.major.x=element_blank(),
+        panel.background=element_blank(),
+        panel.border=element_blank(),
+        legend.title=element_blank(),
+        axis.title=element_text(face="italic"),
+        axis.ticks.y=element_blank(),
+        axis.ticks.x=element_line(color="grey60"),
+        plot.title=element_text(face="bold", hjust=0.5)
+        )
 
+ditch_axes <- theme(
+    axis.text = element_blank(),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    panel.border = element_blank(),
+    panel.grid = element_blank(),
+    axis.title = element_blank()
+    )
 
 server=function(input,output) {
   output$table <- renderTable(
@@ -6,22 +26,49 @@ server=function(input,output) {
       select(binned, price) %>%
       group_by("Rating" = binned) %>%
       summarise("Average price (USD)" = mean(price, na.rm = TRUE))
+      )
+  
+  output$grape_plot <- renderPlot(
+  vino %>% 
+    group_by(country) %>% 
+    mutate(n=n(),
+           mean_price = mean(price, na.rm = TRUE),
+           mean_stars = mean(stars, na.rm = TRUE)) %>% 
+    ggplot(aes(x = reorder(country, n), y = price, color = stars))+
+    #geom_point()+
+    geom_jitter()+
+    scale_y_log10()+
+    coord_flip()+
+    scale_color_viridis()
   )
   
-  map_plot <- reactive({
-    p <- ggplot() +
+  mapPlot <- eventReactive(input$map_goButton, {
+    input_map <- input$map_input
+    ggplot() +
       borders("world", colour="gray80", fill="gray80") +
       geom_polygon(data = wine_map, 
-                   aes_string(x="long", y = "lat", 
-                              group = "group", fill = input$map_input)) +
+                   aes_string(x="long", y = "lat", group = "group", fill = input_map)) +
       ditch_axes +
       coord_fixed() +
       scale_fill_viridis_c(alpha = 1, begin = 0, end = 1,
-                           direction = 1, option = "D", aesthetics = "fill")
-    return(p)
+                           direction = 1, option = "D", aesthetics = "fill")  })
+  output$map <- renderPlot({
+    mapPlot()
+  }
+  )
+  
+  go_plot <- eventReactive(input$btn_go, {
+    data <- filter(vino, vino$country == input$in_title)
+    ggplot(isolate(data), aes(isolate(data$stars))) + 
+      geom_bar(fill = "white", color = "#29B00E") +
+      labs(title = "Wine rating")+
+      xlab("Rating")+
+      ylab("")+
+      xlim(0,5)+
+      theme
   })
   
-  output$map <- renderPlot({map_plot()})
+  output$stars_plot <- renderPlot(go_plot())
   
   
   output$stars_plot <- renderPlot ({ 
@@ -65,7 +112,7 @@ server=function(input,output) {
             axis.ticks.y=element_blank(),
             axis.ticks.x=element_line(color="grey60"),
             plot.title=element_text(face="bold", hjust=0.5))
-  })
+            })
   
   output$spider <- renderPlot ({
     names(demo) <- gsub("taste_", "", names(demo))
