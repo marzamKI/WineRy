@@ -39,12 +39,6 @@ All wines available to buy at [Vinmonopolet](https://www.vinmonopolet.no/datadel
 # The app
 
 
-## Data
-
-Here are the gapminder data. Very coooool!
-
-## Plot
-
 
 
 
