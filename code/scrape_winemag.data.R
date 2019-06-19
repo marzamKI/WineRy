@@ -14,6 +14,7 @@ library(tidyverse)
 wino <- read_csv("data/wine_rating.csv")
 
 # import the systembolaget data (see Import_systembolaget.R)
+systemet_selection<-systembolaget_with_scores
 
 start<-Sys.time()
 
@@ -23,7 +24,7 @@ start<-Sys.time()
 # then does a nested search with producer name for a better match
 # The average score is recorded for wines that match
 
-for (i in 1:1007) {
+for (i in 1:9007) {
   print(i)
   first_selection<-grep(systemet_selection[i,]$name_1,wino$title)
   second_selection<-grep(systemet_selection[i,]$producer,wino[first_selection,]$title)
