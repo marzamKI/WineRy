@@ -61,12 +61,12 @@ server=function(input,output) {
                       marker = list(size = 10,
                                     line = list(color = 'rgba(0, 0, 0, .8)',
                                                 width = 2))) %>%
-        add_lines(y = ~fitted(loess(y ~ x)),
-                  line = list(color = '#07A4B5'),
-                  name = "Loess Smoother", showlegend = TRUE) %>%
                         layout(xaxis = list(title = paste(input$X)),
                                yaxis = list(title = paste(input$Y, "(USD)", sep = " "))
-                               )
+                              ) 
+        # add_lines(y = ~fitted(loess(y ~ x)),
+        #           line = list(color = 'red'),
+        #          name = "Loess Smoother", showlegend = TRUE) 
       
       # ggplot(data = dat, aes(x = x, y = y), source = "select")+
       #   geom_jitter(aes(fill= color),
@@ -93,10 +93,10 @@ server=function(input,output) {
             })
   
   output$spider <- renderPlot ({
-    s <- event_data("plotly_click", source = "select")
-    vars <- c(s[["x"]], s[["y"]])
-    return(as.character(vars))
-    
+    # s <- event_data("plotly_click", source = "select")
+    # vars <- c(s[["x"]], s[["y"]])
+    # return(as.character(vars))
+    # 
     names(demo) <- gsub("taste_", "", names(demo))
     substr(names(demo), 1, 1) <- toupper(substr(names(demo), 1, 1))
     
