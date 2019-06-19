@@ -30,7 +30,7 @@ server=function(input,output) {
       ditch_axes +
       coord_fixed() +
       scale_fill_viridis_c(alpha = 1, begin = 0, end = 1,
-                           direction = 1, option = "inferno", aesthetics = "fill")
+                           direction = 1, option = "D", aesthetics = "fill")
     return(p)
   })
   
