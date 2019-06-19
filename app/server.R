@@ -30,7 +30,7 @@ server=function(input,output) {
       ditch_axes +
       coord_fixed() +
       scale_fill_viridis_c(alpha = 1, begin = 0, end = 1,
-                           direction = 1, option = "D", aesthetics = "fill")
+                           direction = 1, option = "inferno", aesthetics = "fill")
     return(p)
   })
   
@@ -89,8 +89,8 @@ server=function(input,output) {
     
     radarchart(demo  , axistype=1 , 
                #custom polygon
-               pcol= "#F28C26",
-               pfcol=rgb(0.949, 0.549, 0.149, 0.3),
+               pcol= "red",
+               pfcol=rgb(1, 0, 0, 0.3),
                plwd=4 , plty=1,
                #custom the grid
                cglcol="grey", cglty=1, axislabcol="grey", cglwd=0.8,
