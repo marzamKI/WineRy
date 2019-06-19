@@ -56,16 +56,48 @@ server=function(input,output) {
   output$stars_plot <- renderPlot(go_plot())
   
   
-  output$stars_plot <- renderPlot({
-    data <- filter(vino, vino$country == input$in_title)
-    ggplot(isolate(data), aes(isolate(data$stars))) + 
-      geom_bar(fill = "white", color = "#29B00E") +
-      labs(title = "Wine rating")+
+  output$stars_plot <- renderPlot ({ 
+    top <- vino %>% 
+      filter(country == "Spain") %>% 
+      group_by(variety) %>% 
+      summarise(n=n(),
+                mean_price = round(mean(price, na.rm = TRUE),digits = 2),
+                mean_stars = round(mean(stars, na.rm = TRUE), digits = 1)) %>% 
+      arrange(desc(n)) %>% 
+      top_n(n=3, wt=n)
+    
+    vino %>% 
+      filter(country == "Spain") %>% 
+      group_by(variety) %>% 
+      mutate(color = case_when(variety == top[[1,1]] ~ paste("1",variety, sep = " "),
+                               variety == top[[2,1]] ~ paste("2",variety, sep = " "),
+                               variety == top[[3,1]] ~ paste("3",variety, sep = " "),
+                               TRUE ~ "etc.")) %>% 
+      ggplot(aes(x = stars, y = price))+
+      geom_jitter(aes(fill= color),
+                  width = 0.2, height = 0.2, 
+                  shape=21,size=3,stroke=0.8,
+                  #fill="white",
+                  color = "#29B00E",
+                  show.legend = TRUE)+
+      geom_smooth(method="loess",se=F,color="red",size=0.6, show.legend = FALSE)+  
+      labs(title = "Wine rating per price")+
       xlab("Rating")+
-      ylab("")+
+      ylab("Price (USD)") +
       xlim(0,5)+
-      theme
-  })
+      guides(color = guide_legend(nrow = 2))+
+      scale_fill_manual(values = c("red", "orange", "yellow", "grey60"))+
+      theme(legend.position = "bottom",
+            panel.grid.minor=element_blank(),
+            panel.grid.major.x=element_blank(),
+            panel.background=element_blank(),
+            panel.border=element_blank(),
+            legend.title=element_blank(),
+            axis.title=element_text(face="italic"),
+            axis.ticks.y=element_blank(),
+            axis.ticks.x=element_line(color="grey60"),
+            plot.title=element_text(face="bold", hjust=0.5))
+            })
   
   output$spider <- renderPlot ({
     names(demo) <- gsub("taste_", "", names(demo))
