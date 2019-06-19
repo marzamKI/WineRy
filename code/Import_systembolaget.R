@@ -3,15 +3,15 @@
 ### 
 ### 
 ###
-### Anders K. Krabberød 19. june 2019
+### Anders K. Krabber??d 19. june 2019
 ###########
 
 
 library(readr)
 library(tidyverse)
 
-systemet <- read_delim("data/systemet.csv", 
-                       ";", escape_double = FALSE, trim_ws = TRUE)
+# systemet <- read_delim("data/systemet.csv", 
+#                        ";", escape_double = FALSE, trim_ws = TRUE)
 
 colnames(systemet)
 #### renaming columns ####
@@ -25,7 +25,7 @@ systemet_renamed<-systemet %>% rename(product_id=Artikelid,
                                         volume=Volymiml,
                                         price_pr_litre_sek=PrisPerLiter,
                                         sale_start=Saljstart,
-                                        expired=Utgått,
+                                        expired=Utg??tt,
                                         sortiment=Varugrupp,
                                         type=Typ,
                                         style=Stil,
@@ -80,7 +80,7 @@ systemet_renamed$country <- systemet_renamed$country %>%
   str_replace("Haiti","Haiti")  %>% 
   str_replace("Indien","India")  %>% 
   str_replace("Indonesien","Indonesia")  %>% 
-  str_replace("Internationellt märke","International brand")  %>% 
+  str_replace("Internationellt m??rke","International brand")  %>% 
   str_replace("Irland","Ireland")  %>% 
   str_replace("Island","Iceland")  %>% 
   str_replace("Israel","israel")  %>% 
@@ -101,20 +101,20 @@ systemet_renamed$country <- systemet_renamed$country %>%
   str_replace("Moldavien","Moldova")  %>% 
   str_replace("Montenegro","Montenegro")  %>% 
   str_replace("Namibia","Namibia")  %>% 
-  str_replace("Nederländerna","Netherlands")  %>% 
+  str_replace("Nederl??nderna","Netherlands")  %>% 
   str_replace("Nigeria","Nigeria")  %>% 
   str_replace("Nordmakedonien","Macedonia")  %>% 
   str_replace("Norge","Norway")  %>% 
   str_replace("Nya Zeeland","New Zealand")  %>% 
-  str_replace("Okänt ursprung","Unknown origin")  %>% 
-  str_replace("Österrike","Austria")  %>% 
-  str_replace("Övriga ursprung","Other origins")  %>% 
+  str_replace("Ok??nt ursprung","Unknown origin")  %>% 
+  str_replace("??sterrike","Austria")  %>% 
+  str_replace("??vriga ursprung","Other origins")  %>% 
   str_replace("Panama","Panama")  %>% 
   str_replace("Paraguay","Paraguay")  %>% 
   str_replace("Peru","Peru")  %>% 
   str_replace("Polen","Poland")  %>% 
   str_replace("Portugal","Portugal")  %>% 
-  str_replace("Rumänien","Romania")  %>% 
+  str_replace("Rum??nien","Romania")  %>% 
   str_replace("Ryssland","Russia")  %>% 
   str_replace("Saint Kitts & Nevis","Saint Kitts")  %>% 
   str_replace("Serbien och Montenegro","Serbia and Montenegro")  %>% 
@@ -150,20 +150,20 @@ systemet_renamed$apk<-systemet_renamed$alcohol/systemet_renamed$price_pr_litre_s
 #systemet_renamed$type %>% sort() %>% unique()
 systemet_renamed$sortiment %>% sort() %>% unique()
 systemet_renamed$type <-systemet_renamed$sortiment %>% 
-  str_replace("Blå stilla","Blue wine")  %>%
-  str_replace("Röda - lägre alkoholhalt","Red wine")  %>%
-  str_replace("Rött vin","Red wine")  %>%
-  str_replace("Rosé - lägre alkoholhalt","Rosé wine")  %>%
-  str_replace("Rosévin","Rosé wine")  %>%
-  str_replace("Blå mousserande","Sparkling blue")  %>%
-  str_replace("Vita - lägre alkoholhalt","White wine")  %>%
+  str_replace("Bl?? stilla","Blue wine")  %>%
+  str_replace("R??da - l??gre alkoholhalt","Red wine")  %>%
+  str_replace("R??tt vin","Red wine")  %>%
+  str_replace("Ros?? - l??gre alkoholhalt","Ros?? wine")  %>%
+  str_replace("Ros??vin","Ros?? wine")  %>%
+  str_replace("Bl?? mousserande","Sparkling blue")  %>%
+  str_replace("Vita - l??gre alkoholhalt","White wine")  %>%
   str_replace("Vitt vin","White wine") 
   
 
 #### selecting the wines only ####
 selection.list <- paste(c("Champagne", "White wine", 
                           "Red wine","Beading wine",
-                          "Sparkling wine","Rosé wine","Blue wine","Sparkling blue"), collapse = '|')
+                          "Sparkling wine","Ros?? wine","Blue wine","Sparkling blue"), collapse = '|')
 
 systemet_selection<-systemet_renamed %>% filter(grepl(selection.list,type))
 

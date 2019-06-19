@@ -144,4 +144,18 @@ server=function(input,output) {
     
     return(paste('<b><i>', as.character(description), '</i></b>'))
   })
+  
+  output$link <- renderText({
+    click <- event_data("plotly_click", source = "select")
+    if(is.null(click)) return(NULL)
+    vars <- c(click[["x"]], click[["y"]])
+    
+    var1 <- input$X
+    var2 <- input$Y
+    vars <- which(vino[,var1] == vars[1] & vino[,var2] == vars[2])
+    description <- vino[vars, "url"]
+    if (nrow(description)>1) {description <- description[1,]}
+    
+    return(paste0("<a href='", as.character(description), "'>Link to your wine.</a>"))
+  })
 }

@@ -1,0 +1,49 @@
+---
+title: "WineRy"
+author: Anders, Johnathan, Margherita, Stephanie 
+date: June 20, 2019
+output: 
+  revealjs::revealjs_presentation:
+    theme: black
+    center: true
+    transition: "slide"
+---
+
+# An app for the Wine Enthusiast
+
+## What is wineRy?
+
+- An app that allows you to select the best wine for your party!
+- Decide what’s more important for you: Ratings?, Price?, APK?
+- Are you interested in purchasing your bottle based on the Country of origin?
+- Are you looking for a particular Variety of wine?
+
+**WineRy will help you with that and much more!**
+
+# Data
+
+
+## Wine Rating from US
+
+Wine ratings and descriptions were extracted from [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
+
+
+## Available wines at Systembolaget in Sweden
+
+All wines available to buy at [Systembolaget](https://www.systembolaget.se/api/)
+
+## Available wines at Vinmonopolet in Norway
+
+All wines available to buy at [Vinmonopolet](https://www.vinmonopolet.no/datadeling)
+
+# The app
+
+
+
+
+
+
+
+
+
+
