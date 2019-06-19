@@ -50,7 +50,7 @@ monopolet_renamed<-monopolet %>% rename(date=Datotid,
                                         distributor=Distributor,
                                         packaging=Emballasjetype,
                                         corg=Korktype,
-                                        product_num=Vareurl,
+                                        product_url=Vareurl,
                                         organic=Okologisk,
                                         biodynamic=Biodynamisk,
                                         fairtrade=Fairtrade,
@@ -186,12 +186,12 @@ monopolet_selection<-monopolet_renamed %>% filter(grepl(selection.list,type))
 monopolet_selection<-monopolet_selection %>% select("product_name","district",
                                                     "region","year","type","producer",
                                                     "volume","price_nok","price_pr_litre_nok", 
-                                                    "apk","alcohol","product_num","taste_body","taste_freshness","taste_tanins",
+                                                    "apk","alcohol","product_url","taste_body","taste_freshness","taste_tanins",
                                                     "taste_bitternes","taste_sweetnes","country")
 
 
 #### exporting the cleaned and selected data in csv-format ####
-write_csv(monopolet_selection, "data/vinmonopolet.csv")
+#write_csv(monopolet_selection, "data/vinmonopolet.csv")
 
 
 

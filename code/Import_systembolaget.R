@@ -160,7 +160,7 @@ systemet_renamed$type <-systemet_renamed$sortiment %>%
   str_replace("Vitt vin","White wine") 
   
 
-  #### selecting the wines only ####
+#### selecting the wines only ####
 selection.list <- paste(c("Champagne", "White wine", 
                           "Red wine","Beading wine",
                           "Sparkling wine","Rosé wine","Blue wine","Sparkling blue"), collapse = '|')
@@ -173,14 +173,5 @@ systemet_selection<-systemet_selection %>% select("name_1","name_2",
                                                   "volume","price_sek","price_pr_litre_sek", 
                                                   "apk","alcohol","product_num")
 
-
-
-
-
-
-
-
-
-
-write_csv(systemet_selection, "data/systembolaget.csv")
+#write_csv(systemet_selection, "data/systembolaget.csv")
 
