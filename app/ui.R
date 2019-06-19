@@ -4,7 +4,9 @@ ui <- navbarPage("WineRy",
                  fluidPage(theme = shinytheme("united"),
                            sidebarLayout(
                              sidebarPanel(
-                               tableOutput("table"),
+                               fluidRow(
+                                 column(7, tableOutput("table")),
+                                 column(5, img(src="logo.png",height=140,width=140))),
                                h3('Settings'),
                                helpText('Please input your wine priorities.'),
                                selectInput("map_input", 
