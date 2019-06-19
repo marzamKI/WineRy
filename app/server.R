@@ -60,7 +60,7 @@ server=function(input,output) {
                   width = 0.2, height = 0.2, 
                   shape=21,size=3,stroke=0.8,
                   #fill="white",
-                  color = "#29B00E",
+                  color = 'black',
                   show.legend = TRUE)+
         geom_smooth(method="loess",se=F,color="red",size=0.6, show.legend = FALSE)+
       labs(title = paste("Wine", input$X, "per", input$Y, sep=" "))+
@@ -99,5 +99,5 @@ server=function(input,output) {
                vlcex=0.8 )
   })
   
-  output$descr <- renderText({ 'hello'})
+  output$descr <- renderText({ 'The description will go here'})
 }
