@@ -1,0 +1,1 @@
+# global.R contains all code and scripts necessary for the app
