@@ -8,6 +8,7 @@ library(viridis)
 library(magrittr)
 library(fmsb)
 library(shinythemes)
+library(RColorBrewer)
 #library(available)
 
 # data for map
@@ -41,6 +42,4 @@ ditch_axes <- theme(
   panel.grid = element_blank(),
   axis.title = element_blank()
 )
-
-
 
