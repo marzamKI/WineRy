@@ -52,8 +52,9 @@ server=function(input,output) {
       coord_fixed() +
       scale_fill_viridis_c(alpha = 1, begin = 0, end = 1,
                            direction = 1, option = "D", aesthetics = "fill")  })
-  output$map <- renderPlot(
+  output$map <- renderPlot({
     mapPlot()
+  }
   )
   
   go_plot <- eventReactive(input$btn_go, {
