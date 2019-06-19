@@ -32,9 +32,14 @@ ui <- fluidPage(
                   label="Select input",
                   choices = c("mean_price", "mean_point", "size")),
       plotOutput("map"),
-      splitLayout(cellWidths = c("50%", "50%"),
-                  plotOutput("price_plot")),
-      plotOutput("spider")
+      
+      fluidRow(
+        column(6,style=list("padding-right: 5px;"),
+               plotOutput("spider")
+        ),
+        column(6,style=list("padding-left: 5px;"),
+               plotOutput("price_plot")
+        ))
     )
   )
 )

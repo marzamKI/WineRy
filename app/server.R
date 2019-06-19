@@ -65,4 +65,22 @@ server=function(input,output) {
       xlim(0,5)+
       theme
   })
+  
+  output$spider <- renderPlot ({
+    names(demo) <- gsub("taste_", "", names(demo))
+    substr(names(demo), 1, 1) <- toupper(substr(names(demo), 1, 1))
+    
+    demo=rbind(rep(1,5) , rep(0,5) , demo)
+    demo[3,] <- demo[3,]/12
+    
+    radarchart(demo  , axistype=1 , 
+               #custom polygon
+               pcol= "#F28C26",
+               pfcol=rgb(0.949, 0.549, 0.149, 0.3),
+               plwd=4 , plty=1,
+               #custom the grid
+               cglcol="grey", cglty=1, axislabcol="grey", cglwd=0.8,
+               #custom labels
+               vlcex=0.8 )
+  })
 }
