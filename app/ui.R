@@ -46,7 +46,8 @@ ui <- navbarPage("WineRy",
                                         plotlyOutput("stars_plot")),
                                  column(5,style=list("padding-left: 5px;"),
                                         div(plotlyOutput("spider"), align='center'),
-                                        div(htmlOutput("descr"), align = 'center')
+                                        div(htmlOutput("descr"), align = 'center'),
+                                        div(htmlOutput("link"), align = 'center')
                                             )
                                )
                              )
