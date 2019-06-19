@@ -28,15 +28,15 @@ output:
 Wine ratings and descriptions were extracted from [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
 
 
-## Available wines at vinMonopol
+## Available wines at Systembolaget in Sweden
 
-All wines available to buy at [Systembolaget](https://github.com/rfordatascience/tidytuesday)
+All wines available to buy at [Systembolaget](https://www.systembolaget.se/api/)
 
-## Available wines at Systembolaget
+## Available wines at Vinmonopolet in Norway
 
-All wines available to buy at [Systembolaget](https://github.com/rfordatascience/tidytuesday)
+All wines available to buy at [Vinmonopolet](https://www.vinmonopolet.no/datadeling)
 
-# Gapminder
+# The app
 
 
 ## Data
