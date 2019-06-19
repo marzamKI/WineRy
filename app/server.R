@@ -36,6 +36,7 @@ server=function(input,output) {
       geom_polygon(data = wine_map, 
                    aes_string(x="long", y = "lat", group = "group", fill = input$map_input)) +
       ditch_axes +
+      coord_fixed() +
       scale_fill_viridis_c(alpha = 1, begin = 0, end = 1,
                            direction = 1, option = "D", aesthetics = "fill")
   })
