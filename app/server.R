@@ -20,7 +20,8 @@ server=function(input,output) {
     coord_flip()+
     scale_color_viridis()
   )
-  
+
+  # Map plot
   map_plot <- reactive({
     p <- ggplot() +
       borders("world", colour="gray80", fill="gray80") +
@@ -30,24 +31,25 @@ server=function(input,output) {
       ditch_axes +
       coord_fixed() +
       scale_fill_viridis_c(alpha = 1, begin = 0, end = 1,
-                           direction = 1, option = "D", aesthetics = "fill")
+                           direction = 1, option = "D", aesthetics = "fill") +
+      labs(fill=paste("Average", input$map_input))
     return(p)
   })
   
   output$map <- renderPlot({map_plot()})
   
-  go_plot <- eventReactive(input$btn_go, {
-    data <- filter(vino, vino$country == input$in_title)
-    ggplot(isolate(data), aes(isolate(data$stars))) + 
-      geom_bar(fill = "white", color = "#29B00E") +
-      labs(title = "Wine rating")+
-      xlab("Rating")+
-      ylab("")+
-      xlim(0,5)+
-      theme
-  })
-  
-  output$stars_plot <- renderPlot(go_plot())
+  # go_plot <- eventReactive(input$btn_go, {
+  #   data <- filter(vino, vino$country == input$in_title)
+  #   ggplot(isolate(data), aes(isolate(data$stars))) + 
+  #     geom_bar(fill = "white", color = "#29B00E") +
+  #     labs(title = "Wine rating")+
+  #     xlab("Rating")+
+  #     ylab("")+
+  #     xlim(0,5)+
+  #     theme
+  # })
+  # 
+  # output$stars_plot <- renderPlot(go_plot())
   
   
   output$stars_plot <- renderPlot ({ 
@@ -92,7 +94,7 @@ server=function(input,output) {
             axis.ticks.x=element_line(color="grey60"),
             plot.title=element_text(face="bold", hjust=0.5))
             })
-  
+# third row  
   output$spider <- renderPlot ({
     names(demo) <- gsub("taste_", "", names(demo))
     substr(names(demo), 1, 1) <- toupper(substr(names(demo), 1, 1))
@@ -110,4 +112,8 @@ server=function(input,output) {
                #custom labels
                vlcex=0.8 )
   })
+  
+  output$descr <- ({ 
+    # input description
+    })
 }

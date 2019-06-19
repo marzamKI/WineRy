@@ -1,7 +1,6 @@
 source("../code/global.R", local = FALSE)
 
 ui <- navbarPage("WineRy",
-                 tabPanel("WineExplorer",
                           fluidPage(theme = shinytheme("united"),
                                     sidebarLayout(
                                       sidebarPanel(
@@ -26,13 +25,13 @@ ui <- navbarPage("WineRy",
                                           column(6,style=list("padding-left: 5px;"),
                                                  selectInput("Y", label="Y Axis", choices = NULL)
                                           ))
-                                        ),
+                                      ),
                                       
                                       mainPanel(
                                         # map
                                         selectInput("map_input", 
                                                     label="Select input",
-                                                    choices = c("mean_price", "mean_point", "size")),
+                                                    choices = c("Price", "Point", "Amount")),
                                         plotOutput("map"),
                                         # second row
                                         fluidRow(
@@ -40,19 +39,17 @@ ui <- navbarPage("WineRy",
                                                  plotOutput("stars_plot")),
                                           column(6,style=list("padding-left: 5px;"),
                                                  plotOutput("stars_plot2"))
-                                        ))
-                                      
+                                        ),
+                                        # spider plot
+                                        fluidRow(
+                                          column(6,style=list("padding-right: 5px;"),
+                                                 plotOutput("spider")
+                                          ),
+                                          column(6,style=list("padding-left: 5px;"),
+                                                 plotOutput("descr")
+                                          ))
+                                      )
                                     )
-                          )
-                 ),
-                 # spider plot
-                 tabPanel("IndividualWines",
-                          fluidRow(
-                            column(6,style=list("padding-right: 5px;"),
-                                   plotOutput("spider")
-                            ),
-                            column(6,style=list("padding-left: 5px;"),
-                                   plotOutput("descr")
-                            ))
+    
                  )
 )

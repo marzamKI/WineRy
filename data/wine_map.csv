@@ -1,4 +1,4 @@
-"","long","lat","group","order","region","subregion","mean_price","mean_point","size"
+"","long","lat","group","order","region","subregion","Price","Point","Amount"
 "1",-64.5491638183594,-54.7162132263184,1,1,"Argentina","Isla de los Estados",30.1666666666667,1.95,30
 "2",-64.4388198852539,-54.7393569946289,1,2,"Argentina","Isla de los Estados",30.1666666666667,1.95,30
 "3",-64.2205047607422,-54.7219734191895,1,3,"Argentina","Isla de los Estados",30.1666666666667,1.95,30
