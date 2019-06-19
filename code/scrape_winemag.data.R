@@ -23,7 +23,7 @@ start<-Sys.time()
 # then does a nested search with producer name for a better match
 # The average score is recorded for wines that match
 
-for (i in 1:9007) {
+for (i in 1:1007) {
   print(i)
   first_selection<-grep(systemet_selection[i,]$name_1,wino$title)
   second_selection<-grep(systemet_selection[i,]$producer,wino[first_selection,]$title)
@@ -40,4 +40,4 @@ end<-Sys.time()
 end-start #Time: 37.28418 mins
 
 # Write the data
-#write_csv(systemet_selection,"data/systembolaget.csv")
+#write_csv(systemet_selection,"data/systembolaget_with_scores.csv")
