@@ -1,9 +1,3 @@
-
-#source("../code/global.R", local = TRUE)
-
-vino <- read.csv("../data/vino.csv", header = T)
-wine_map <- read.csv("../data/wine_map.csv", header = T)
-
 theme <-theme_bw(base_family="Helvetica")+
   theme(legend.position = "none",
         panel.grid.minor=element_blank(),

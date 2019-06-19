@@ -8,5 +8,8 @@ library(viridis)
 library(magrittr)
 #library(available)
 
+vino <- read.csv("../data/vino.csv", header = T)
+wine_map <- read.csv("../data/wine_map.csv", header = T)
+
 
 

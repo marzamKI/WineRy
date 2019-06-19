@@ -1,8 +1,5 @@
 source("../code/global.R", local = FALSE)
 
-vino <- read.csv("../data/vino.csv", header = T)
-wine_map <- read.csv("../data/wine_map.csv", header = T)
-
 ui <- fluidPage(
   titlePanel("WineRy"),
   sidebarLayout(
