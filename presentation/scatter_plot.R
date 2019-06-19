@@ -36,7 +36,7 @@ top <- vino %>%
   arrange(desc(n)) %>%
   top_n(n=3, wt=n) %>% pull(variety)
 
-vino %>% 
+p_vino <- vino %>% 
   filter(country == "Spain")  %>% 
   group_by(variety) %>% 
   mutate(n=n(),
@@ -70,4 +70,8 @@ vino %>%
         axis.ticks.y=element_blank(),
         axis.ticks.x=element_line(color="grey60"),
         plot.title=element_text(face="bold", hjust=0.5))
+
+ggplotly(p_vino)
+
+
   
