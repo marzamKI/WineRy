@@ -32,7 +32,7 @@ ui <- fluidPage(
                   label="Select input",
                   choices = c("mean_price", "mean_point", "size")),
       plotOutput("map"),
-      
+      plotOutput("stars_plot"),
       fluidRow(
         column(6,style=list("padding-right: 5px;"),
                plotOutput("spider")
