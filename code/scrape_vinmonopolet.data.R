@@ -24,19 +24,19 @@ start<-Sys.time()
 for (i in 1:10) {
   
   first_selection<-grep(systemet_selection[i,]$name_1,monopolet_selection$product_name)
-  print("first\n")
-  print(length(first_selection))
-  #second_selection<-grep(systemet_selection[i,]$name_2,monopolet_selection[first_selection,]$title) #CHEKC FOR NA
-  second_selection<-grep(systemet_selection[i,]$name_2,monopolet_selection[first_selection,]$product_name)
-  print("second")
-  print(length(second_selection))
+  # print("first\n")
+  # print(length(first_selection))
+  # #second_selection<-grep(systemet_selection[i,]$name_2,monopolet_selection[first_selection,]$title) #CHEKC FOR NA
+  # second_selection<-grep(systemet_selection[i,]$name_2,monopolet_selection[first_selection,]$product_name)
+  # print("second")
+  # print(length(second_selection))
   
   
-  # systemet_selection[i,]$taste_bitternes <- monopolet_selection[first_selection[1],]$taste_bitternes
-  # systemet_selection[i,]$taste_body <- monopolet_selection[first_selection[1],]$taste_body
-  # systemet_selection[i,]$taste_freshness <- monopolet_selection[first_selection[1],]$taste_freshness
-  # systemet_selection[i,]$taste_sweetnes <- monopolet_selection[first_selection[1],]$taste_sweetnes
-  # systemet_selection[i,]$taste_tanins <- monopolet_selection[first_selection[1],]$taste_tanins
+  systemet_selection[i,]$taste_bitternes <- monopolet_selection[first_selection[1],]$taste_bitternes
+  systemet_selection[i,]$taste_body <- monopolet_selection[first_selection[1],]$taste_body
+  systemet_selection[i,]$taste_freshness <- monopolet_selection[first_selection[1],]$taste_freshness
+  systemet_selection[i,]$taste_sweetnes <- monopolet_selection[first_selection[1],]$taste_sweetnes
+  systemet_selection[i,]$taste_tanins <- monopolet_selection[first_selection[1],]$taste_tanins
 
 }
 end<-Sys.time()
