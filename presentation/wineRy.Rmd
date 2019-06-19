@@ -32,7 +32,7 @@ output:
 ## Systembolaget in Sweden
 
 - All wines available to buy at [Systembolaget](https://www.systembolaget.se/api/)
-- In total 9008 wines
+- In total ~9000 wines
 
 ## Vinmonopolet in Norway
 
