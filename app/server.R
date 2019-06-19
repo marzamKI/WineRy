@@ -1,8 +1,3 @@
-library(tidyverse)
-library(ggmap)
-vino <- read.csv("../data/vino.csv", header = T)
-wine_map <- read.csv("../data/wine_map.csv", header = T)
-
 theme <-theme_bw(base_family="Helvetica")+
   theme(legend.position = "none",
         panel.grid.minor=element_blank(),
@@ -32,12 +27,14 @@ server=function(input,output) {
       group_by("Rating" = binned) %>%
       summarise("Average price (USD)" = mean(price, na.rm = TRUE))
       )
-    
+  
+  getdata <- reactive({ get(input$map_input,'package:datasets') })
+  
   output$map <- renderPlot({
     ggplot()+
       borders("world", colour="gray80", fill="gray80") +
       geom_polygon(data = wine_map, 
-                   aes(x=long, y = lat, group = group, fill = as.numeric(input$map_input))) +
+                   aes_string(x="long", y = "lat", group = "group", fill = input$map_input)) +
       ditch_axes +
       coord_fixed() +
       scale_fill_viridis_c(alpha = 1, begin = 0, end = 1,
