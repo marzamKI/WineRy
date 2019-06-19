@@ -1,14 +1,14 @@
 
 server=function(input,output) {
   output$table <- renderTable(
-    vino %>%
+    vino_us %>%
       select(binned, price) %>%
       group_by("Rating" = binned) %>%
       summarise("Average price (USD)" = mean(price, na.rm = TRUE))
       )
   
   output$grape_plot <- renderPlot(
-  vino %>% 
+  vino_us %>% 
     group_by(country) %>% 
     mutate(n=n(),
            mean_price = mean(price, na.rm = TRUE),
@@ -36,27 +36,23 @@ server=function(input,output) {
   output$map <- renderPlot({map_plot()})
   
   output$stars_plot <- renderPlotly ({ 
-    top <- vino %>% 
-      filter(country == input$in_title) %>% 
-      group_by(variety) %>% 
-      summarise(n=n(),
-                mean_price = round(mean(price, na.rm = TRUE),digits = 2),
-                mean_stars = round(mean(stars, na.rm = TRUE), digits = 1)) %>% 
-      arrange(desc(n)) %>% 
-      top_n(n=3, wt=n)
+    # top <- vino %>% 
+    #   filter(country == input$in_title) %>% 
+    #   group_by(type) %>% 
+    #   summarise(n=n(),
+    #             mean_price = round(mean(price_sek, na.rm = TRUE),digits = 2),
+    #             mean_stars = round(mean(stars, na.rm = TRUE), digits = 1)) %>% 
+    #   arrange(desc(n)) %>% 
+    #   top_n(n=3, wt=n)
     
 
       dat <- vino %>% 
       filter(country == input$in_title) %>% 
-      group_by(variety) %>% 
-      select(x=input$X,y=input$Y) %>% 
-      mutate(color = case_when(variety == top[[1,1]] ~ paste("1",variety, sep = " "),
-                               variety == top[[2,1]] ~ paste("2",variety, sep = " "),
-                               variety == top[[3,1]] ~ paste("3",variety, sep = " "),
-                               TRUE ~ "etc."))
+      group_by(type) %>% 
+      select(x=input$X,y=input$Y)
       dat <- na.omit(dat)
       dat %>% plot_ly(x = ~x, y = ~y, type = "scatter", source = 'select',
-                      color = ~color, colors = c("#D94801", "#FDAE6B", "#FFF5EB", "gray80"),
+                      color = ~type, colors = c("#D94801", "#FDAE6B", "#FFF5EB", "gray80"),
                       marker = list(size = 10,
                                     line = list(color = 'rgba(0, 0, 0, .4)',
                                                 width = 2))) %>%
@@ -91,31 +87,55 @@ server=function(input,output) {
       #       plot.title=element_text(face="bold", hjust=0.5))
             })
   
-  output$spider <- renderPlot ({
-    # s <- event_data("plotly_click", source = "select")
-    # vars <- c(s[["x"]], s[["y"]])
-    # return(as.character(vars))
-    # 
+  output$spider <- renderPlotly ({
+    click <- event_data("plotly_click", source = "select")
+    if(is.null(click)) return(NULL)
+    vars <- c(click[["x"]], click[["y"]])
+    
+    var1 <- input$X
+    var2 <- input$Y
+    vars <- which(vino[,var1] == vars[1] & vino[,var2] == vars[2])
+    
+    demo <- vino[vars, grep("taste_", names(vino))]
+    demo <- demo[!apply(demo, 1 , function(x) all(is.na(x))), ]
+    
     names(demo) <- gsub("taste_", "", names(demo))
     substr(names(demo), 1, 1) <- toupper(substr(names(demo), 1, 1))
     
-    demo=rbind(rep(1,5) , rep(0,5) , demo)
-    demo[3,] <- demo[3,]/12
+    p <- plot_ly(
+      type = 'scatterpolar',
+      r = as.numeric(demo[1,]),
+      theta = names(demo),
+      fill = 'toself'
+    ) %>%
+      layout(
+        polar = list(
+          radialaxis = list(
+            visible = T,
+            range = c(0,12)
+          )
+        ),
+        showlegend = F
+      )
+    return(p)
     
-    radarchart(demo  , axistype=1 , 
-               #custom polygon
-               pcol= "red",
-               pfcol=rgb(1, 0, 0, 0.3),
-               plwd=4 , plty=1,
-               #custom the grid
-               cglcol="grey", cglty=1, axislabcol="grey", cglwd=0.8,
-               #custom labels
-               vlcex=0.8 )
+    # radarchart(demo  , axistype=1 , 
+    #            #custom polygon
+    #            pcol= "red",
+    #            pfcol=rgb(1, 0, 0, 0.3),
+    #            plwd=4 , plty=1,
+    #            #custom the grid
+    #            cglcol="grey", cglty=1, axislabcol="grey", cglwd=0.8,
+    #            #custom labels
+    #            vlcex=0.8 )
   })
   
   output$descr <- renderText({ 
-    s <- event_data("plotly_click", source = "select")
-    vars <- c(s[["x"]], s[["y"]])
-    return(as.character(vars))
+    click <- event_data("plotly_click", source = "select")
+    if(is.null(click)) return(NULL)
+    vars <- c(click[["x"]], click[["y"]])
+    
+    demo <- vino[c(input$X == vars[1] & input$Y==vars[2]), grep("taste_", names(vino))]
+    return(as.character(demo))
   })
 }
