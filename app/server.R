@@ -1,11 +1,17 @@
 
 server=function(input,output) {
-  output$table <- renderTable(
-    vino_us %>%
+  output$table <- renderTable({
+    t_temp <- vino_us_large %>%
       select(binned, price) %>%
       group_by("Rating" = binned) %>%
       summarise("Average price (USD)" = mean(price, na.rm = TRUE))
-  )
+    t_temp2 <- vino_us_large %>%
+      filter(country == input$in_title) %>% 
+      select(binned, price) %>%
+      group_by("Rating" = binned) %>%
+      summarise(in_country = mean(price, na.rm = TRUE)) #paste("Average price in", input$in_title,"(USD)", sep = " ")
+    bind_cols(t_temp, t_temp2[2]) %>% return()
+      })
   
   output$grape_plot <- renderPlot(
     vino_us_large %>% 

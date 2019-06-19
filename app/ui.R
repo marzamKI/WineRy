@@ -8,7 +8,7 @@ ui <- navbarPage("WineRy",
                                #img(src="logo.png",height=200,width=200),
                                fluidRow(
                                  column(3, img(src="logo.png",height=100,width=100)),
-                                 column(9, tableOutput("")) #table
+                                 column(9, tableOutput("table")) #table
                                  ),
                                h3('Settings'),
                                helpText('Please input your wine priorities.'),
@@ -18,7 +18,7 @@ ui <- navbarPage("WineRy",
                                fluidRow(
                                  column(12,style=list("padding-right: 5px;"),
                                         selectInput("in_title", label="Select country",
-                                                    choices = vino$country,
+                                                    choices = sort(vino$country),
                                                     selected = 1)
                                  )),
                                fluidRow(
