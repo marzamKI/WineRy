@@ -54,7 +54,7 @@ server=function(input,output) {
       select(x=input$X,y=input$Y)
     dat <- na.omit(dat)
     dat %>% plot_ly(x = ~x, y = ~y, type = "scatter", source = 'select',
-                    color = ~type, colors = c("#D94801", "#FDAE6B", "#FFF5EB", "gray80"),
+                    color = ~type, colors = c("#D94801", "#FDAE6B", "#FFDFC1"),
                     marker = list(size = 10,
                                   line = list(color = 'rgba(0, 0, 0, .4)',
                                               width = 2))) %>%
