@@ -33,6 +33,7 @@ top <- vino %>%
   summarise(n=n(),
             mean_price = mean(price, na.rm = TRUE),
             mean_stars = mean(stars, na.rm = TRUE)) %>% 
+  arrange(desc(n)) %>%
   top_n(n=3, wt=n) %>% pull(variety)
 
 vino %>% 
