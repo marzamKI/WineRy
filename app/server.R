@@ -36,20 +36,6 @@ server=function(input,output) {
   
   output$map <- renderPlot({map_plot()})
   
-  go_plot <- eventReactive(input$btn_go, {
-    data <- filter(vino, vino$country == input$in_title)
-    ggplot(isolate(data), aes(isolate(data$stars))) + 
-      geom_bar(fill = "white", color = "#29B00E") +
-      labs(title = "Wine rating")+
-      xlab("Rating")+
-      ylab("")+
-      xlim(0,5)+
-      theme
-  })
-  
-  output$stars_plot <- renderPlot(go_plot())
-  
-  
   output$stars_plot <- renderPlot ({ 
     top <- vino %>% 
       filter(country == input$in_title) %>% 
@@ -63,22 +49,23 @@ server=function(input,output) {
     vino %>% 
       filter(country == input$in_title) %>% 
       group_by(variety) %>% 
+      select(x=input$X,y=input$Y) %>% 
       mutate(color = case_when(variety == top[[1,1]] ~ paste("1",variety, sep = " "),
                                variety == top[[2,1]] ~ paste("2",variety, sep = " "),
                                variety == top[[3,1]] ~ paste("3",variety, sep = " "),
                                TRUE ~ "etc.")) %>% 
-      ggplot(aes(x = stars, y = price))+
-      geom_jitter(aes(fill= color),
+      ggplot(aes(x = x, y = y))+
+        geom_jitter(aes(fill= color),
                   width = 0.2, height = 0.2, 
                   shape=21,size=3,stroke=0.8,
                   #fill="white",
                   color = "#29B00E",
                   show.legend = TRUE)+
-      geom_smooth(method="loess",se=F,color="red",size=0.6, show.legend = FALSE)+  
-      labs(title = "Wine rating per price")+
-      xlab("Rating")+
-      ylab("Price (USD)") +
-      xlim(0,5)+
+        geom_smooth(method="loess",se=F,color="red",size=0.6, show.legend = FALSE)+
+      labs(title = paste("Wine", input$X, "per", input$Y, sep=" "))+
+      xlab(paste(input$X))+
+      ylab(paste(input$Y, "(USD)", sep = " ")) +
+      #xlim(0,5)+
       guides(color = guide_legend(nrow = 2))+
       scale_fill_manual(values = c("red", "orange", "yellow", "grey60"))+
       theme(legend.position = "bottom",
