@@ -12,6 +12,8 @@ library(fmsb)
 vino <- read_csv("../data/vino.csv")
 wine_map <- read_csv("../data/wine_map.csv")
 
+systemet <- read_csv("../data/systemet_vin.csv")
+
 
 demo=read.csv('../data/vinmonopolet_taste.csv')
 demo <- demo[128,2:6]
