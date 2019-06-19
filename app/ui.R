@@ -23,7 +23,7 @@ ui <- fluidPage(
       tags$br(),
       actionButton("btn_go","Go!"),
       tags$hr(),
-      plotOutput("full_plot"),
+      plotOutput("grape_plot"),
       tags$hr(),
       submitButton("Print shopping list")),
     
