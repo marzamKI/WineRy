@@ -32,7 +32,9 @@ ui <- navbarPage("WineRy",
                                         selectInput("Y", label="Y Axis",
                                                     choices = c("stars", "price", "points"),
                                                     selected = "price")
-                                 ))
+                                 )),
+                               plotOutput("grape_plot")
+                               
                              ),
                              
                              mainPanel(
@@ -54,3 +56,4 @@ ui <- navbarPage("WineRy",
                  )
                  
 )
+

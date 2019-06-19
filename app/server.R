@@ -18,7 +18,7 @@ server=function(input,output) {
     geom_jitter()+
     scale_y_log10()+
     coord_flip()+
-    scale_color_viridis()
+    scale_color_gradient(low = "#FFF5EB", high = "#D94801")
   )
   
   map_plot <- reactive({
@@ -29,8 +29,7 @@ server=function(input,output) {
                               group = "group", fill = input$map_input)) +
       ditch_axes +
       coord_fixed() +
-      scale_fill_viridis_c(alpha = 1, begin = 0, end = 1,
-                           direction = 1, option = "D", aesthetics = "fill")
+      scale_fill_gradient(low = "#FFF5EB", high = "#D94801")
     return(p)
   })
   
@@ -57,9 +56,9 @@ server=function(input,output) {
                                TRUE ~ "etc."))
       dat <- na.omit(dat)
       dat %>% plot_ly(x = ~x, y = ~y, type = "scatter", source = 'select',
-                      color = ~color, colors = c("red", "orange", "yellow", "grey60"),
+                      color = ~color, colors = c("#D94801", "#FDAE6B", "#FFF5EB", "gray80"),
                       marker = list(size = 10,
-                                    line = list(color = 'rgba(0, 0, 0, .8)',
+                                    line = list(color = 'rgba(0, 0, 0, .4)',
                                                 width = 2))) %>%
                         layout(xaxis = list(title = paste(input$X)),
                                yaxis = list(title = paste(input$Y, "(USD)", sep = " "))
