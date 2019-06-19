@@ -9,7 +9,8 @@ server=function(input,output) {
   
   output$grape_plot <- renderPlot(
     vino_us %>% 
-      group_by(country) %>% 
+      group_by(country) %>%
+      filter(!is.na(country)) %>% 
       mutate(n=n(),
              mean_price = mean(price, na.rm = TRUE),
              mean_stars = mean(stars, na.rm = TRUE)) %>% 
