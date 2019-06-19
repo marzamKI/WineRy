@@ -1,6 +1,6 @@
 ---
 title: "WineRy"
-author: Anders, Johnathan, Margherita, Stephanie 
+author: Anders, Jonathan, Margherita, Stephanie 
 date: June 20, 2019
 output: 
   revealjs::revealjs_presentation:
@@ -25,17 +25,19 @@ output:
 
 ## Wine Rating from US
 
-Wine ratings and descriptions were extracted from [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
-In total about 130 000 reviews.
+- Wine ratings and descriptions were extracted from [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
+- In total about 130 000 reviews
 
 
-## Available wines at Systembolaget in Sweden
+## Systembolaget in Sweden
 
-All wines available to buy at [Systembolaget](https://www.systembolaget.se/api/)
+- All wines available to buy at [Systembolaget](https://www.systembolaget.se/api/)
+- In total 9008 wines
 
-## Available wines at Vinmonopolet in Norway
+## Vinmonopolet in Norway
 
-All wines available to buy at [Vinmonopolet](https://www.vinmonopolet.no/datadeling)
+- All wines available to buy at [Vinmonopolet](https://www.vinmonopolet.no/datadeling)
+- In total ~14000 wines
 
 # The app
 
