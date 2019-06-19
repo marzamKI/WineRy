@@ -7,6 +7,7 @@ library(maps)
 library(viridis)
 library(magrittr)
 library(fmsb)
+library(shinytheme)
 #library(available)
 
 # data for map
