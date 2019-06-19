@@ -5,30 +5,10 @@
 ###
 ### Anders K. Krabberoed 19. june 2019
 ###########
-
-
 library(readr)
 library(tidyverse)
-
-x<-list()
-for (i in dim(wino)[1]) {
-  x[i]<-grep(monopolet_selection$product_name[i], monopolet_renamed_1$product_name)
-  
-}
-x<-grep("Faustino", monopolet_selection$product_name)
-wino[123175,]$title
-
-
-(s<-grep("Amarone della Valpolicella Classico", systemet_selection$name_2))
-(v<-grep("Amarone della Valpolicella Classico", monopolet_selection$product_name))
-
-
-View(wino[w,])
-View(systemet_selection[s,])
-View(monopolet_selection[v,])
-
-new_name_syst<-paste(systemet_selection$name_1,systemet_selection$name_2) %>% str_remove(" NA")
 #write_csv(as.data.frame(new_name_syst),"grep.patterns.csv")
+
 start<-Sys.time()
 
 for (i in 1:9007) {
@@ -53,8 +33,4 @@ for (i in 1:9007) {
 }
 end<-Sys.time()
 
-systemet_selection$taste
-grep(new_name_syst[112],monopolet_selection$product_name)
-
-new_name_syst[112]
-write_csv(systemet_selection,"data/systembolaget.csv")
+#write_csv(systemet_selection,"data/wine_data_score_taste.csv")
