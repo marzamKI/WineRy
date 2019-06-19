@@ -20,10 +20,10 @@ ui <- navbarPage("WineRy",
                                           )),
                                         fluidRow(
                                           column(6,style=list("padding-right: 5px;"),
-                                                 selectInput("X", label="X Axis", choices = NULL)
+                                                 selectInput("Xaxis", label="X Axis", choices = c("price", "stars"))
                                           ),
                                           column(6,style=list("padding-left: 5px;"),
-                                                 selectInput("Y", label="Y Axis", choices = NULL)
+                                                 selectInput("Yaxis", label="Y Axis", choices = c("price", "stars"))
                                           ))
                                       ),
                                       
