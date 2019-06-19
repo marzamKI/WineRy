@@ -31,6 +31,7 @@ ui <- fluidPage(
       selectInput("map_input", 
                   label="Select input",
                   choices = c("mean_price", "mean_point", "size")),
+      actionButton("map_goButton","Go!"),
       plotOutput("map"),
       
       fluidRow(

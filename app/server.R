@@ -28,18 +28,19 @@ server=function(input,output) {
       summarise("Average price (USD)" = mean(price, na.rm = TRUE))
       )
   
-  getdata <- reactive({ get(input$map_input,'package:datasets') })
-  
-  output$map <- renderPlot({
-    ggplot()+
+  mapPlot <- eventReactive(input$map_goButton, {
+    input_map <- input$map_input
+    ggplot() +
       borders("world", colour="gray80", fill="gray80") +
       geom_polygon(data = wine_map, 
-                   aes_string(x="long", y = "lat", group = "group", fill = input$map_input)) +
+                   aes_string(x="long", y = "lat", group = "group", fill = input_map)) +
       ditch_axes +
       coord_fixed() +
       scale_fill_viridis_c(alpha = 1, begin = 0, end = 1,
-                           direction = 1, option = "D", aesthetics = "fill")
-  })
+                           direction = 1, option = "D", aesthetics = "fill")  })
+  output$map <- renderPlot(
+    mapPlot()
+  )
   
   go_plot <- eventReactive(input$btn_go, {
     data <- filter(vino, vino$country == input$in_title)

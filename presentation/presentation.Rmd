@@ -6,16 +6,18 @@ output: ioslides_presentation
 ---
 # 
 
+## Introduction
+- 
+- 
+- 
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 source("../code/global.R", local = FALSE)
 
 ```
 
-## Introduction
-- 
-- 
-- 
 
 ## Dataset
 
