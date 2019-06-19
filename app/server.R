@@ -36,7 +36,7 @@ server=function(input,output) {
   
   output$map <- renderPlot({map_plot()})
   
-  output$stars_plot <- renderPlot ({ 
+  output$stars_plot <- renderPlotly ({ 
     top <- vino %>% 
       filter(country == input$in_title) %>% 
       group_by(variety) %>% 
@@ -46,7 +46,8 @@ server=function(input,output) {
       arrange(desc(n)) %>% 
       top_n(n=3, wt=n)
     
-    vino %>% 
+      ggplotly(
+      vino %>% 
       filter(country == input$in_title) %>% 
       group_by(variety) %>% 
       select(x=input$X,y=input$Y) %>% 
@@ -77,7 +78,7 @@ server=function(input,output) {
             axis.title=element_text(face="italic"),
             axis.ticks.y=element_blank(),
             axis.ticks.x=element_line(color="grey60"),
-            plot.title=element_text(face="bold", hjust=0.5))
+            plot.title=element_text(face="bold", hjust=0.5)))
             })
   
   output$spider <- renderPlot ({

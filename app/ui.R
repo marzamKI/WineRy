@@ -42,7 +42,7 @@ ui <- navbarPage("WineRy",
                                # second row
                                fluidRow(
                                  column(6,style=list("padding-right: 5px;"),
-                                        plotOutput("stars_plot")),
+                                        plotlyOutput("stars_plot")),
                                  column(6,style=list("padding-left: 5px;"),
                                         plotOutput("stars_plot2"))
                                ),
