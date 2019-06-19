@@ -1,24 +1,3 @@
-theme <-theme_bw(base_family="Helvetica")+
-  theme(legend.position = "none",
-        panel.grid.minor=element_blank(),
-        panel.grid.major.x=element_blank(),
-        panel.background=element_blank(),
-        panel.border=element_blank(),
-        legend.title=element_blank(),
-        axis.title=element_text(face="italic"),
-        axis.ticks.y=element_blank(),
-        axis.ticks.x=element_line(color="grey60"),
-        plot.title=element_text(face="bold", hjust=0.5)
-        )
-
-ditch_axes <- theme(
-    axis.text = element_blank(),
-    axis.line = element_blank(),
-    axis.ticks = element_blank(),
-    panel.border = element_blank(),
-    panel.grid = element_blank(),
-    axis.title = element_blank()
-    )
 
 server=function(input,output) {
   output$table <- renderTable(
@@ -42,20 +21,20 @@ server=function(input,output) {
     scale_color_viridis()
   )
   
-  mapPlot <- eventReactive(input$map_goButton, {
-    input_map <- input$map_input
-    ggplot() +
+  map_plot <- reactive({
+    p <- ggplot() +
       borders("world", colour="gray80", fill="gray80") +
       geom_polygon(data = wine_map, 
-                   aes_string(x="long", y = "lat", group = "group", fill = input_map)) +
+                   aes_string(x="long", y = "lat", 
+                              group = "group", fill = input$map_input)) +
       ditch_axes +
       coord_fixed() +
       scale_fill_viridis_c(alpha = 1, begin = 0, end = 1,
-                           direction = 1, option = "D", aesthetics = "fill")  })
-  output$map <- renderPlot({
-    mapPlot()
-  }
-  )
+                           direction = 1, option = "D", aesthetics = "fill")
+    return(p)
+  })
+  
+  output$map <- renderPlot({map_plot()})
   
   go_plot <- eventReactive(input$btn_go, {
     data <- filter(vino, vino$country == input$in_title)
