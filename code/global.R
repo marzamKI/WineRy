@@ -14,6 +14,10 @@ library(RColorBrewer)
 # data for map
 vino <- read_csv("../data/wine_data_score_taste.csv")
 vino_us <- read_csv("../data/vino.csv")
+vino_us_large <- read_csv("../data/wine_rating.csv")
+vino_us_large$binned <- cut(vino_us_large$points, breaks = 6, labels = 0:5)
+vino_us_large$stars <- (vino_us_large$points-80)/(20) *5
+
 wine_map <- read_csv("../data/wine_map.csv")
 
 systemet <- read_csv("../data/systemet_vin.csv")

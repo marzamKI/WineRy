@@ -5,11 +5,11 @@ ui <- navbarPage("WineRy",
                  fluidPage(theme = shinytheme("united"),
                            sidebarLayout(
                              sidebarPanel(
-                               img(src="logo.png",height=200,width=200),
-                               # fluidRow(
-                               #   column(5, img(src="logo.png",height=140,width=140)),
-                               #   column(7, tableOutput("table"))
-                               #   ),
+                               #img(src="logo.png",height=200,width=200),
+                               fluidRow(
+                                 column(3, img(src="logo.png",height=100,width=100)),
+                                 column(9, tableOutput("")) #table
+                                 ),
                                h3('Settings'),
                                helpText('Please input your wine priorities.'),
                                selectInput("map_input", 
@@ -24,12 +24,12 @@ ui <- navbarPage("WineRy",
                                fluidRow(
                                  column(6,style=list("padding-right: 5px;"),
                                         selectInput("X", label="X Axis", 
-                                                    choices = c("score", "price_sek", "apk"),
+                                                    choices = c("score", "price_sek", "apk", "alcohol"),
                                                     selected = "score")
                                  ),
                                  column(6,style=list("padding-left: 5px;"),
                                         selectInput("Y", label="Y Axis",
-                                                    choices = c("score", "price_sek", "apk"),
+                                                    choices = c("score", "price_sek", "apk", "alcohol"),
                                                     selected = "price_sek")
                                  )),
                                plotOutput("grape_plot")
