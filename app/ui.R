@@ -1,4 +1,5 @@
-library(shiny)
+source("../code/global.R", local = TRUE)
+
 vino <- read.csv("../data/vino.csv", header = T)
 wine_map <- read.csv("../data/wine_map.csv", header = T)
 
