@@ -14,7 +14,6 @@ server=function(input,output) {
              mean_price = mean(price, na.rm = TRUE),
              mean_stars = mean(stars, na.rm = TRUE)) %>% 
       ggplot(aes(x = reorder(country, n), y = price, color = stars))+
-      #geom_point()+
       geom_jitter()+
       scale_y_log10()+
       coord_flip()+
@@ -57,7 +56,7 @@ server=function(input,output) {
                                   line = list(color = 'rgba(0, 0, 0, .4)',
                                               width = 2))) %>%
       layout(xaxis = list(title = paste(input$X)),
-             yaxis = list(title = paste(input$Y, "(USD)", sep = " "))
+             yaxis = list(title = paste(input$Y))
       ) 
     # add_lines(y = ~fitted(loess(y ~ x)),
     #           line = list(color = 'red'),
@@ -126,15 +125,14 @@ server=function(input,output) {
     if(is.null(click)) return(NULL)
     vars <- c(click[["x"]], click[["y"]])
     
-    # var1 <- input$X
-    # var2 <- input$Y
-    # vars <- which(vino[,var1] == vars[1] & vino[,var2] == vars[2])
-    # 
-    # description <- vino[vars, ]
-    # description <- description[!apply(description, 1 , function(x) all(is.na(x))), ]
-    # if (nrow(description)>1) {description <- description[1,]}
+    var1 <- input$X
+    var2 <- input$Y
+    vars <- which(vino[,var1] == vars[1] & vino[,var2] == vars[2])
     
+    description <- vino[vars, c("name_1", "name_2", "year")]
+    description <- description[!apply(description, 1 , function(x) all(is.na(x))), ]
+    if (nrow(description)>1) {description <- description[1,]}
     
-    return(as.character(vars))
+    return(paste('<b><i>', as.character(description), '</i></b>'))
   })
 }

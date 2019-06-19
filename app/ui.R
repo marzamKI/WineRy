@@ -1,18 +1,20 @@
 source("../code/global.R", local = FALSE)
 
 ui <- navbarPage("WineRy",
+                 tabPanel("Explore the wine",
                  fluidPage(theme = shinytheme("united"),
                            sidebarLayout(
                              sidebarPanel(
-                               fluidRow(
-                                 column(7, tableOutput("table")),
-                                 column(5, img(src="logo.png",height=140,width=140))),
+                               img(src="logo.png",height=200,width=200),
+                               # fluidRow(
+                               #   column(5, img(src="logo.png",height=140,width=140)),
+                               #   column(7, tableOutput("table"))
+                               #   ),
                                h3('Settings'),
                                helpText('Please input your wine priorities.'),
                                selectInput("map_input", 
                                            label="Select input for map",
                                            choices = c("Price", "Points", "Size")),
-                               h4('Have a deeper look'),
                                fluidRow(
                                  column(12,style=list("padding-right: 5px;"),
                                         selectInput("in_title", label="Select country",
@@ -36,20 +38,21 @@ ui <- navbarPage("WineRy",
                              
                              mainPanel(
                                # map
-                               h3('Wine properties in the world'),
+                               h3('Wines around the world'),
                                plotOutput("map"),
                                # second row
                                fluidRow(
-                                 column(6,style=list("padding-right: 5px;"),
+                                 column(7,style=list("padding-right: 5px;"),
                                         plotlyOutput("stars_plot")),
-                                 column(6,style=list("padding-left: 5px;"),
+                                 column(5,style=list("padding-left: 5px;"),
                                         div(plotlyOutput("spider"), align='center'),
-                                        div(textOutput("descr"), align = 'center')
+                                        div(htmlOutput("descr"), align = 'center')
                                             )
                                )
                              )
                              
                            )
+                 )
                  )
                  
 )
