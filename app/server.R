@@ -106,7 +106,8 @@ server=function(input,output) {
       type = 'scatterpolar',
       r = as.numeric(demo[1,]),
       theta = names(demo),
-      fill = 'toself'
+      fill = 'toself',
+      color = '#D94801'
     ) %>%
       layout(
         polar = list(
@@ -118,16 +119,6 @@ server=function(input,output) {
         showlegend = F
       )
     return(p)
-    
-    # radarchart(demo  , axistype=1 , 
-    #            #custom polygon
-    #            pcol= "red",
-    #            pfcol=rgb(1, 0, 0, 0.3),
-    #            plwd=4 , plty=1,
-    #            #custom the grid
-    #            cglcol="grey", cglty=1, axislabcol="grey", cglwd=0.8,
-    #            #custom labels
-    #            vlcex=0.8 )
   })
   
   output$descr <- renderText({ 
