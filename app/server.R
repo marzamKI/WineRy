@@ -97,4 +97,6 @@ server=function(input,output) {
                #custom labels
                vlcex=0.8 )
   })
+  
+  output$descr <- renderText({ 'hello'})
 }
