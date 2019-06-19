@@ -26,7 +26,7 @@ server=function(input,output) {
   
   output$stars_plot <- renderPlot ({ 
     top <- vino %>% 
-      filter(country == "Spain") %>% 
+      filter(country == input$in_title) %>% 
       group_by(variety) %>% 
       summarise(n=n(),
                 mean_price = round(mean(price, na.rm = TRUE),digits = 2),
@@ -35,7 +35,7 @@ server=function(input,output) {
       top_n(n=3, wt=n)
     
     vino %>% 
-      filter(country == "Spain") %>% 
+      filter(country == input$in_title) %>% 
       group_by(variety) %>% 
       mutate(color = case_when(variety == top[[1,1]] ~ paste("1",variety, sep = " "),
                                variety == top[[2,1]] ~ paste("2",variety, sep = " "),

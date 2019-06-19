@@ -10,10 +10,14 @@ ui <- navbarPage("WineRy",
                                         helpText('Please input your wine priorities.'),
                                         fluidRow(
                                           column(6,style=list("padding-right: 5px;"),
-                                                 selectInput("in_title", label="Select country",choices = vino$country)
+                                                 selectInput("in_title", label="Select country",
+                                                             choices = vino$country,
+                                                             selected = 1)
                                           ),
                                           column(6,style=list("padding-left: 5px;"),
-                                                 selectizeInput("variety", "Select variety", vino$variety)
+                                                 selectizeInput("variety", "Select variety", 
+                                                                choices = vino$variety,
+                                                                selected = 1)
                                           )),
                                         fluidRow(
                                           column(6,style=list("padding-right: 5px;"),
