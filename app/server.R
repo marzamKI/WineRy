@@ -46,7 +46,7 @@ server=function(input,output) {
       arrange(desc(n)) %>% 
       top_n(n=3, wt=n)
     
-      ggplotly(
+      ggplotly(source = "stars_plot",
       vino %>% 
       filter(country == input$in_title) %>% 
       group_by(variety) %>% 
@@ -81,22 +81,48 @@ server=function(input,output) {
             plot.title=element_text(face="bold", hjust=0.5)))
             })
   
-  output$spider <- renderPlot ({
-    names(demo) <- gsub("taste_", "", names(demo))
-    substr(names(demo), 1, 1) <- toupper(substr(names(demo), 1, 1))
+  
+  output$spider <- renderPlotly ({
+    # if there is no click data, render nothing!
+    clickData <- event_data("plotly_click", source = "stars_plot")
+    if (is.null(clickData)) return(NULL)
     
-    demo=rbind(rep(1,5) , rep(0,5) , demo)
-    demo[3,] <- demo[3,]/12
-    
-    radarchart(demo  , axistype=1 , 
-               #custom polygon
-               pcol= "red",
-               pfcol=rgb(1, 0, 0, 0.3),
-               plwd=4 , plty=1,
-               #custom the grid
-               cglcol="grey", cglty=1, axislabcol="grey", cglwd=0.8,
-               #custom labels
-               vlcex=0.8 )
+    # Obtain the clicked x/y variables and fit linear model to those 2 vars
+    vars <- c(clickData[["x"]], clickData[["y"]])
+    ggplotly(vino %>% 
+      ggplot(aes(x=vars[[1]], y=vars[[2]]))+
+        geom_point())
+    # 
+    # names(demo) <- gsub("taste_", "", names(demo))
+    # substr(names(demo), 1, 1) <- toupper(substr(names(demo), 1, 1))
+    # 
+    # demo=rbind(rep(1,5) , rep(0,5) , demo)
+    # demo[3,] <- demo[3,]/12
+    # 
+    # plot_ly(data = demo, 
+    #   type = 'scatterpolar',
+    #   r = c(39, 28, 8, 7, 28, 39),
+    #   theta = c('A','B','C', 'D', 'E', 'A'),
+    #   fill = 'toself'
+    # ) %>%
+    #   layout(
+    #     polar = list(
+    #       radialaxis = list(
+    #         visible = T,
+    #         range = c(0,50)
+    #       )
+    #     ),
+    #     showlegend = F
+    #   )
+    # # radarchart(demo  , axistype=1 , 
+    #            #custom polygon
+    #            pcol= "red",
+    #            pfcol=rgb(1, 0, 0, 0.3),
+    #            plwd=4 , plty=1,
+    #            #custom the grid
+    #            cglcol="grey", cglty=1, axislabcol="grey", cglwd=0.8,
+    #            #custom labels
+    #            vlcex=0.8 )
   })
   
   output$descr <- renderText({ 'The description will go here'})
