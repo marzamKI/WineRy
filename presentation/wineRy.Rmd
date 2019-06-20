@@ -14,7 +14,7 @@ output:
 ## What is wineRy?
 
 - An app that allows you to select the best wine for your party!
-- Decide what???s more important for you: Ratings?, Price?, APK?
+- Decide what's more important for you: Ratings?, Price?, APK?
 - Are you interested in purchasing your bottle based on the Country of origin?
 - Are you looking for a particular Variety of wine?
 
