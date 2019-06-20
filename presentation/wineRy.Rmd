@@ -43,6 +43,10 @@ output:
 
 ## 140 commits later..
 
+```{r, echo = F, out.width = 500, fig.align = "center"}
+knitr::include_graphics('../gitpic.png')
+``` 
+
 
 
 
