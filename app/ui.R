@@ -14,7 +14,7 @@ ui <- navbarPage("WineRy",
                                helpText('Please input your wine priorities.'),
                                selectInput("map_input", 
                                            label="Select input for map",
-                                           choices = c("Price", "Points", "Size")),
+                                           choices = c("Price", "Points", "Amount")),
                                fluidRow(
                                  column(12,style=list("padding-right: 5px;"),
                                         selectInput("in_title", label="Select country",

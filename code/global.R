@@ -22,10 +22,10 @@ wine_map <- read_csv("../data/wine_map.csv")
 
 systemet <- read_csv("../data/systemet_vin.csv")
 
-# data for spider plot
-demo=read.csv('../data/vinmonopolet_taste.csv')
-demo <- demo[128,2:6]
-
+# # data for spider plot
+# demo=read.csv('../data/vinmonopolet_taste.csv')
+# demo <- demo[128,2:6]
+# 
 theme <-theme_bw(base_family="Helvetica")+
   theme(legend.position = "none",
         panel.grid.minor=element_blank(),
