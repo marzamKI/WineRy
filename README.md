@@ -1,3 +1,3 @@
 # WineRy
 
-Test from steph
+An app for the Wine Enthusiast
